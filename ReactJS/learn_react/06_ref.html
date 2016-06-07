@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>学习ReactJS！</title>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script src="../build/jquery.js" charset="utf-8"></script>
+        <script src="../build/react.js" charset="utf-8"></script>
+        <script src="../build/react-dom.js" charset="utf-8"></script>
+        <script src="../build/browser.min.js"></script>
+        <script type="text/babel">
+            var FormApp=React.createClass({
+                getInitialState:function(){
+                    return {
+                        inputValue:'input value',
+                        selectValue:'A',
+                        radioValue:'B',
+                        textareaValue:'some text here .....',
+                        checkValues:[],
+                    }
+                },
+                handleSubmit:function(e){
+                    e.preventDefault();
+                    // var that=this;
+                    // var _refs=;
+                    // console.log(_refs.goodInput.value);
+                    var formDate={
+                        input:this.refs.goodInput.value,
+                        select:this.refs.goodSelect.value,
+                        textarea:this.refs.goodTextarea.value,
+                        radio:this.state.radioValue,
+                        check:this.state.checkValues
+                    };
+                    // console.log(ReactDOM.findDOMNode(this.refs['goodInput']).value);
+                    // console.log(this.refs.goodInput.value);
+                    console.log(formDate);
+                    this.refs.goodRadio.saySomething();
+                    // console.log(this.refs);
+                },
+                handleCheck:function(e){
+                    var checkValues=this.state.checkValues.slice();
+                    var newVal=e.target.value;
+                    var index=checkValues.indexOf(newVal);
+                    if(index==-1) {
+                        checkValues.push(newVal);
+                    }else{
+                        checkValues.splice(index,1);
+                    }
+                    this.setState({
+                        checkValues:checkValues,
+                    })
+                },
+                handleRadio:function(e){
+                    this.setState({
+                        radioValue:e.target.value,
+                    })
+                },
+                render:function(){
+                    return (
+                        <form onSubmit={this.handleSubmit}>
+                            <input ref="goodInput" type="text" defaultValue={this.state.inputValue}/><br/>
+                            选项：
+                            <select defaultValue={this.state.selectValue} ref="goodSelect">
+                            // 将表单中标签的值换成默认值时，将无法修改表单内容
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                            </select><br/>
+                            <p>radio button!</p>
+                                <RadioButtons ref="goodRadio" handleRadio={this.handleRadio}/>
+                            <br/>
+                                <Checkboxes ref="goodCheck" handleCheck={this.handleCheck}/>
+                            <br/>
+                            <textarea defaultValue={this.state.textareaValue} ref="goodTextarea"></textarea>
+                            <button type="submit">提交</button>
+                        </form>
+                    )
+                }
+            });
+            var RadioButtons=React.createClass({
+                saySomething:function(){
+                    alert('you what\'s up man');
+                },
+                render:function(){
+                    return (
+                        <span>
+                        A
+                        <input type="radio" name="goodRadio" value="A" onChange={this.props.handleRadio}/>
+                        B
+                        <input type="radio" defaultChecked name="goodRadio" value="B" onChange={this.props.handleRadio}/>
+                        C
+                        <input type="radio" name="goodRadio" value="C" onChange={this.props.handleRadio}/>
+                        </span>
+                    )
+                }
+            });
+            var Checkboxes=React.createClass({
+                render:function(){
+                    return (
+                        <span>
+                        A
+                        <input type="checkbox" name="goodRadio" value="A" onChange={this.props.handleCheck}/>
+                        B
+                        <input type="checkbox" name="goodRadio" value="B" onChange={this.props.handleCheck}/>
+                        C
+                        <input type="checkbox" name="goodRadio" value="C" onChange={this.props.handleCheck}/>
+                        </span>
+                    )
+                }
+            })
+            var formApp=ReactDOM.render(
+                <FormApp />,
+                document.getElementById('app')
+            )
+        </script>
+    </body>
+</html>

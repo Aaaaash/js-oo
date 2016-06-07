@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>学习ReactJS！</title>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script src="../build/jquery.js" charset="utf-8"></script>
+        <script src="../build/react.js" charset="utf-8"></script>
+        <script src="../build/react-dom.js" charset="utf-8"></script>
+        <script src="../build/browser.min.js"></script>
+        <script type="text/babel">
+        // 组件
+            var MessageBox=React.createClass({
+                getInitialState:function(){
+                    return {
+                        count:0,
+                    }
+                },
+                getDefaultProps:function(){
+
+                },
+                // componentWillMount:function(){
+                //
+                // },
+                // componentDidMount:function(){
+                //
+                // },
+                // componentWillUnmount:function(){
+                //
+                // },
+                shouldComponentUpdate:function(nextProp,nextState){
+                    console.log('shouldComponentUpdate');
+                    // if(nextState.count>3) return false;
+                    return true;
+                },
+                componentDidUpdate:function(nextProp,nextState){
+                    console.log('正在更新');
+                },
+                componentWillUpdate:function(nextProp,nextState){
+                    console.log('componentWillUpdate');
+                },
+                doUpdate:function(){
+                    this.setState({
+                        count:this.state.count+1,
+                    })
+                },
+                killMyself:function(){
+                    ReactDOM.unmountComponentAtNode(document.getElementById('app'));
+                },
+                render:function(){
+                    console.log('开始渲染');
+                    return (
+                        <div>
+                            <h1>计数：{this.state.count}</h1>
+                            <button onClick={this.killMyself}>卸载组件</button>
+                            <button onClick={this.doUpdate}>手动更新组件（包括子组件）</button>
+                            <SubMessage count={this.state.count}/>
+                        </div>
+                    )
+                }
+            });
+            var SubMessage=React.createClass({
+                componentWillReceiveProps:function(nextProp){
+                    console.log('子组件将会获得props');
+                    // if(nextProp.count>3) this.props.count=5;
+                },
+                shouldComponentUpdate:function(nextProp,nextState){
+                    if(nextProp.count>5) return false;
+                    return true;
+                },
+                render:function(){
+                    return (
+                        <h3>当前计数是{this.props.count}</h3>
+                    )
+                }
+            });
+
+            var messageBox=ReactDOM.render(<MessageBox/>,
+                document.getElementById('app'),function(){
+                    console.log('渲染完成了！');
+                });
+                // console.log(messageBox);
+        </script>
+    </body>
+</html>

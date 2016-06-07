@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="build/react.js" charset="utf-8"></script>
+        <script src="build/react-dom.js" charset="utf-8"></script>
+        <script src="build/browser.min.js"></script>
+    </head>
+    <body>
+        <div id="example"></div>
+        <script type="text/babel">
+        // this.props对象的属性与组件的属性一一对应
+        // 只有一个例外，就是this.props.Children属性，它表示组件的所有子节点
+            var NotesList=React.createClass({
+                render:function(){
+                    return (
+                        <ol>
+                        {
+                            // React.Children.map用来遍历子节点
+                            React.Children.map(this.props.children,function(child){
+                                return <li>{child}</li>;
+                            })
+                        }
+                        </ol>
+                    );
+                }
+            });
+            // NoteList组件有两个span子节点，都可以通过this.props.Children读取
+            // this.props.Children的值有三种
+            // 1.如果当前组件没有子节点，它就是undefined
+            // 2.如果当前组件有一个子节点，数据类型是object
+            // 3.如果当前组件有多个子节点,数据类型就是array
+            // React.Children用来处理this.props.children，我们可以用React.children来遍历子节点，不用担心this.props.children的数据类型是什么
+            ReactDOM.render(
+                <NotesList>
+                    <a>hello</a>
+                    <a>world</a>
+                    // 这里插入节点时的子节点类型可以是任何一种dom标签，因为最终显示在页面上的标签是根据组件里提供的标签来渲染的
+                </NotesList>,
+                document.body
+            )
+        </script>
+    </body>
+</html>

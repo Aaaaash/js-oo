@@ -1,0 +1,26 @@
+{
+  "name": "reac_demo",
+  "version": "1.0.0",
+  "description": "demo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "demo"
+  ],
+  "author": "sakura",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^15.1.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-browserify": "^0.5.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-connect": "^4.0.0",
+    "gulp-react": "^3.1.0",
+    "lodash": "^4.13.1",
+    "reactify": "^1.1.1"
+  }
+}

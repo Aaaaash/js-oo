@@ -1,5 +1,0 @@
-1.ReactJs是由Facebook开发的
-2.ReactJs不是一个新的模板语言
-3.虚拟DOM（Virtual DOM），在浏览器端用JavaScript实现了一套DOM API，基于react开发时所有的DOM构造都是通过虚拟DOM进行，数据发生变化时，React 都会重新构建整个DOM树，然后React将当前整个DOM树和上一次的DOM树进行对比，得到DOM结构的区别，然后仅仅将需要变化的部分进行实际的浏览器DOM更新
-4.每一次都需要构造完整的虚拟DOM树，但是因为虚拟DOM是内存数据，性能是极高的，而对实际DOM进行操作的仅仅是Diff部分，因而能达到提高性能的目的
-5.遇到 HTML 标签（以 < 开头），就用 HTML 规则解析；遇到代码块（以 { 开头），就用 JavaScript 规则解析
